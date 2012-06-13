@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
@@ -9,18 +10,29 @@ using namespace std;
 using namespace boost;
 
 int main() {
-  shared_ptr<ExponentialFunction> exp_fp(new ExponentialFunction(2,3.4,5));
+  // testing variables
+  double calculated, answer, difference;
 
+  // exponential function
+  shared_ptr<ExponentialFunction> exp_fp(new ExponentialFunction(2,3.4,5));
+  cout << "testing the exponential function for correctness:" << endl;
   for (int i=0; i < 11; i++) {
-    cout << exp_fp->value(i) << 
-      " " << 2*exp(3.4*i)+5 << endl;
+    calculated = exp_fp->value(i);
+    answer = 2*exp(3.4*i)+5;
+    difference = calculated - answer;
+    printf("calculated: %+.4e, answer: %+.4e, difference: %1.1f\n",calculated,answer,difference);
   }
 
-  shared_ptr<LinearFunction> lin_fp(new LinearFunction(2,3.4));
+  cout << endl;
 
+  // linear function
+  shared_ptr<LinearFunction> lin_fp(new LinearFunction(2,3.4));
+  cout << "testing the linear function for correctness:" << endl;
   for (int i=0; i < 11; i++) {
-    cout << lin_fp->value(i) << 
-      " " << 2*i+3.4 << endl;
+    calculated = lin_fp->value(i);
+    answer = 2*i+3.4;
+    difference = calculated - answer;
+    printf("calculated: %+.4e, answer: %+.4e, difference: %1.1f\n",calculated,answer,difference);
   }
   
   cout << endl;
